@@ -1,0 +1,7 @@
+public class FlipCardsController {
+  @AuraEnabled    
+  public static Value_added_service__c[] getCards(){      
+     System.debug('Inside FlipCardsController......');
+     return [select Name, price__c, icon__c, isAdded__c from Value_added_service__c limit 20]; 
+  }
+}
