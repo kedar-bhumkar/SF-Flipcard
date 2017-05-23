@@ -1,0 +1,41 @@
+<aura:component implements="flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes,force:hasRecordId" access="global" controller="FlipCardsController"> 
+    <ltng:require scripts="{!join(',', 
+    $Resource.SLDS + '/js/jquery.min.js', 
+    $Resource.SLDS + '/js/flip2.js')}" afterScriptsLoaded="{!c.loadScripts}"/>
+  	<ltng:require styles="{!$Resource.fontawesome + '/font-awesome-4.6.3/css/font-awesome.min.css'}" />
+    <aura:attribute name="services" type="Object[]"/> 
+    
+    <!--aura:attribute name="triggerVar" type="Boolean" default="false"/-->
+    <!--aura:handler name="change" value="{!v.triggerVar}" action="{!c.handleClick}"/-->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <!--aura:handler event="aura:doneRendering" action="{!c.doneRendering}"/-->
+	
+	<div class="slds-grid slds-wrap">
+	  <aura:iteration items="{!v.services}" var="theService"> 	
+        <div class="slds-align--absolute-center slds-p-horizontal--small slds-size--1-of-4 slds-medium-size--1-of-4 slds-large-size--1-of-4">
+		    <div class ="card">
+				<div class="{! 'front ' + (theService.isAdded__c ? 'addedcard' : ' ') }">
+					<div class="slds-align--absolute-center slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1">
+                    	<a  class = "servicename" onclick="{!c.handleClick}">{!theService.Name}</a>
+                    </div>
+                    <div class="slds-m-top--xx-large slds-align--absolute-center slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1">
+                    	<i class="{! 'fa fa-' + theService.icon__c +  ' fa-5x'}" aria-hidden="true"></i>
+                    </div>    
+				</div>
+				<div class="{! 'back ' + (theService.isAdded__c ? 'addedcard' : ' ') }" style="display:none;">
+                    <div class="slds-m-top--small slds-align--absolute-center slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1">
+                    	<span class ="price">AUD {!theService.Price__c}</span>
+                    </div>
+                    <div class="slds-m-top--small slds-align--absolute-center slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1">
+                        <span class = "description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque aliquet, nibh non varius efficitur.</span>
+                    </div>    
+                    <div class="slds-m-top--small slds-align--absolute-center slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-1">
+                        <i class="{! 'fa fa-' + (!theService.isAdded__c ? 'plus-circle' : 'minus-circle') + ' fa-2x'}" aria-hidden="true"></i>
+                    </div>    
+                    
+				</div> 			
+			</div>	
+		</div>
+	  </aura:iteration> 	
+	</div>
+</aura:component>
